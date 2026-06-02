@@ -32,4 +32,19 @@ class HashMap {
         this.buckets[hashCode].push([key, value]);
     }
 
+    get(key) {
+        let hashCode = this.hash(key);
+        let bucket = this.buckets[hashCode];
+
+        if (bucket === undefined) {
+            return null;
+        } 
+        for (let pair of bucket) {
+            if(pair[0] === key) {
+                return pair[1];
+            }
+        }
+        return null;
+    }
+
 }
