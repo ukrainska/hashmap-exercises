@@ -2,6 +2,7 @@ class HashMap {
     constructor () {
         this.loadFactor = 0.75;
         this.capacity = 16;
+        this.buckets = new Array(this.capacity);
     }
 
     hash(key) {
@@ -12,7 +13,23 @@ class HashMap {
             hashCode = primeNumber * hashCode + key.charCodeAt(i);
         }
 
-        return hashCode;
+        return hashCode % this.capacity;
     } 
+
+    set(key, value) {
+        let hashCode = this.hash(key);
+        if (this.buckets[hashCode] === undefined) {
+            this.buckets[hashCode] = [];
+        }
+
+        for (let pair of this.buckets[hashCode]) {
+            if (pair[0] === key) {
+                pair[1] = value;
+                return;
+            }
+        }
+        
+        this.buckets[hashCode].push([key, value]);
+    }
 
 }
