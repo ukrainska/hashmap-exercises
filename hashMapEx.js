@@ -33,8 +33,7 @@ class HashMap {
     }
 
     get(key) {
-        let hashCode = this.hash(key);
-        let bucket = this.buckets[hashCode];
+        const bucket = this.getBucket(key);
 
         if (bucket === undefined) {
             return null;
@@ -48,8 +47,7 @@ class HashMap {
     }
 
     has(key) {
-        let hashCode = this.hash(key);
-        let bucket = this.buckets[hashCode];
+        const bucket = this.getBucket(key);
 
         if (bucket === undefined) {
             return false;
@@ -62,5 +60,27 @@ class HashMap {
         }
         return false;
     }
+ 
+    remove(key) {
+        const bucket = this.getBucket(key);
 
+        if (bucket === undefined) {
+            return false;
+        }
+
+        for (let i = 0; i < bucket.length; i++) {
+            const pair = bucket[i];
+
+            if (pair[0] === key) {
+                bucket.splice(i, 1);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    getBucket(key) {
+        let hashCode = this.hash(key);
+        let bucket = this.buckets[hashCode];
+    }
 }
