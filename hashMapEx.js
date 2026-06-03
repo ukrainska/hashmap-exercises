@@ -93,6 +93,10 @@ class HashMap {
         return counter;
     }
 
+    clear() {
+        this.buckets = new Array(this.capacity);
+    }
+
     getBucket(key) {
         let hashCode = this.hash(key);
         let bucket = this.buckets[hashCode];
