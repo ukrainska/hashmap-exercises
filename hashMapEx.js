@@ -97,6 +97,23 @@ class HashMap {
         this.buckets = new Array(this.capacity);
     }
 
+    keys() {
+        let keyArray = [];
+
+        for (let i = 0; i < this.buckets.length;i++) {
+            const bucket = this.buckets[i];
+
+            if (bucket === undefined) {
+                continue;
+            }
+            for (let j = 0; j < bucket.length; j++) {
+                const pair = bucket[j];
+                keyArray[j].push(pair[0]);
+            }
+        }
+        return keyArray;
+    }
+
     getBucket(key) {
         let hashCode = this.hash(key);
         let bucket = this.buckets[hashCode];
