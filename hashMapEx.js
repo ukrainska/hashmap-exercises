@@ -114,6 +114,24 @@ class HashMap {
         return keyArray;
     }
 
+    values() {
+        let valuesArray = [];
+
+        for (let i = 0; i < this.buckets.length;i++) {
+            const bucket = this.buckets[i];
+
+            if (bucket === undefined) {
+                continue;
+            }
+
+            for (let j = 0; j < bucket.length; j++) {
+                const pair = bucket[j];
+                valuesArray.push(pair[1]);
+            }
+        }
+        return valuesArray;
+    }
+
     getBucket(key) {
         let hashCode = this.hash(key);
         let bucket = this.buckets[hashCode];
