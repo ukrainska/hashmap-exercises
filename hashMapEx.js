@@ -79,6 +79,20 @@ class HashMap {
         return false;
     }
 
+    length() {
+        let counter = 0;
+
+        for (let i = 0; i < this.buckets.length; i++) {
+            const bucket = this.buckets[i];
+
+            if (bucket !== undefined){
+                counter += bucket.length;
+            }
+        }
+
+        return counter;
+    }
+
     getBucket(key) {
         let hashCode = this.hash(key);
         let bucket = this.buckets[hashCode];
