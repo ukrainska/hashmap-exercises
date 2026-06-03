@@ -47,4 +47,20 @@ class HashMap {
         return null;
     }
 
+    has(key) {
+        let hashCode = this.hash(key);
+        let bucket = this.buckets[hashCode];
+
+        if (bucket === undefined) {
+            return false;
+        }
+
+        for (let pair of bucket) {
+            if (pair[0] === key) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
